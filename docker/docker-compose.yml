@@ -1,0 +1,25 @@
+version: "3"
+services:
+  react:
+    container_name: "react"
+    # Dockerfileをビルド
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # docekrfileに引数を渡す
+      args:
+        PROJECT_NAME: ${PROJECT_NAME}
+    ports:
+      - 3000:3000
+    volumes:
+      # 名前付きボリューム
+      - react-volume:/workspace
+
+    # 環境変数読み込み
+    env_file:
+      - .env
+    tty: true
+
+# 名前付きボリューム
+volumes:
+  react-volume:
